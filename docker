@@ -1,0 +1,27 @@
+What is docker ? 
+
+DOcker is a container management software
+
+What is a docker image ? 
+
+Image is this instruction to build your container, if you run that image you'll get same spec as the image.
+Its like a snapshot of your container. Image contains layer. 
+Can think of it as a blueprint.
+
+What is a container ?
+
+Container are ready to roll application from docker images.
+
+What are the benefits ? 
+
+Easy to install, if I hand you my image you can have my config.
+It makes sure you work on the same environement.
+It is also flexible.
+
+VM vs container ?
+
+Virtual machine have a complete operating system on it, hardware is virtualize.
+Container doesn't have an operating system, it virtualize the operating system, it is just a process.
+Vm tend to takes more space and more ressources, they also take longer to launch.
+Container in the other hand are instant, and more portable.
+CF screenshots
