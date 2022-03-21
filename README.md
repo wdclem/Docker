@@ -118,5 +118,43 @@ docker run -d --name lair -p 8080:80 --link spawning-pool:mysql wordpress
 Links allow containers to discover each other and securely transfer information about one container to another container.
 Ahen you set up a link, you create a conduit between a source container and a recipient container.
 The recipient can then access select data about the source.
+Check http://localhost:8080 it should display a wordpress installer
 
+12
 
+https://omarghader.github.io/docker-tutorial-phpmyadmin-and-mysql-server/
+docker run --name roach-warden -d --link spawning-pool:db -p 8081:80 phpmyadmin/phpmyadmin
+
+Phpmyadmin must point to MySQL Server in order to work.
+To run the container use docker run --name myadmin -d --link mysql:db -p 8080:80 phpmyadmin/phpmyadmin
+(the previous command in our case)
+On http://localhost:8081 you should have a phpMyAdmin prompt
+
+13
+
+docker logs -f spawning-pool
+-f, --follow option to display live log output
+
+14
+
+docker ps
+
+15
+
+docker restart overlord
+
+16
+
+docker run -dit --name Abathur -v ~/:/root -p 3000:3000 python:2-slim
+docker exec Abathur pip install Flask
+echo 'from flask import Flask\napp = Flask(__name__)\n@app.route("/")\ndef hello_world():\n\treturn "<h1>Hello, World!</h1>"' > ~/app.py
+docker exec -e FLASK_APP=/root/app.py Abathur flask run --host=0.0.0.0 --port 3000
+
+with echo you put the code of into app.py
+can double check on http://0.0.0.0:3000/
+
+17
+
+docker swarm init --advertise-addr machine IP (mac 127.0.0.1)
+
+https://docs.docker.com/engine/swarm/swarm-tutorial/create-swarm/
