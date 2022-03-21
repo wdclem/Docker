@@ -158,3 +158,65 @@ can double check on http://0.0.0.0:3000/
 docker swarm init --advertise-addr machine IP (mac 127.0.0.1)
 
 https://docs.docker.com/engine/swarm/swarm-tutorial/create-swarm/
+
+19
+
+20
+
+21
+
+To change the default usermane and password of guest/guest you use RABBITMQ_DEFAULT_USER and RABBITMQ_DEFAULT_PASS
+-d --detach exit immediately instead of waiting for the service to converge.
+
+22
+
+docker service ls
+
+23
+
+With an orbital-command running on your host/swarm, set 
+0C_USERNAME : the username to access the orbital commadn
+0C_PASSWD : the password to acces
+
+24 
+
+https://docs.docker.com/engine/reference/commandline/service_ps/
+docker service create -d --network overming --name engineering-bay --replicas 2 -e 0C_USERNAME=johnny -e 0C_PASSWD=123123 42school/engineering-bay
+
+25
+
+docker service create -d --network overming --name marines --replicas 2 -e 0C_USERNAME=johnny -e 0C_PASSWD=123123 42school/marine-squad
+
+same idea that with ex 23 and the orbital command just had it to it
+
+26
+
+docker service ps marines
+
+ps list the tasks of the services
+
+27
+
+docker service scale -d marines=20
+
+scale one or multiple replicated services.
+-d --detach
+
+Can check the logs with 
+docker service logs -f $(docker service ps marines -f "name=marines.11" -q)
+
+28
+
+docker service rm $(docker service ls -q)
+rm for remove
+
+29
+
+docker rm -f $(docker ps -a -q)
+
+-f --force (uses SIGKILL)
+
+30
+
+docker rmi $(docker images -a -q)
+rmi remove images
