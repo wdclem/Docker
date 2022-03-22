@@ -1,5 +1,5 @@
 # Docker
-Introduction to Docker
+# Introduction to Docker
 
 01
 
@@ -119,14 +119,15 @@ Links allow containers to discover each other and securely transfer information 
 Ahen you set up a link, you create a conduit between a source container and a recipient container.
 The recipient can then access select data about the source.
 Check http://localhost:8080 it should display a wordpress installer
-
+You can also setup the database directly using WORDPRESS_DB_HOST/USER ...
 12
 
 https://omarghader.github.io/docker-tutorial-phpmyadmin-and-mysql-server/
 docker run --name roach-warden -d --link spawning-pool:db -p 8081:80 phpmyadmin/phpmyadmin
 
 Phpmyadmin must point to MySQL Server in order to work.
-To run the container use docker run --name myadmin -d --link mysql:db -p 8080:80 phpmyadmin/phpmyadmin
+To run the container use docker run --name myadmin -d --link mysql:db -p 
+8080:80 phpmyadmin/phpmyadmin
 (the previous command in our case)
 On http://localhost:8081 you should have a phpMyAdmin prompt
 
@@ -220,3 +221,50 @@ docker rm -f $(docker ps -a -q)
 
 docker rmi $(docker images -a -q)
 rmi remove images
+
+
+#DOCKERFILES
+
+Exercise 00
+docker build -t new_docker_image_name PATH_to_Dockerfile
+
+FROM alpine:latest
+
+RUN apk update
+	&& apk add vim
+
+Tell the docker to pull the latest Alpine docker image, update and install vim
+&& to redo the previous command and keep it cleaner
+#to run it > docker build -t clem/ex00 . (in the dockerfile folder, name/fpath)
+#to build it > docker run --rm -ti ex00
+
+Exercise 01
+
+Voice use port 9987 udp
+file transfer 30033 tcp
+Query server 10011
+
+once container is created need to make sure those are open
+docker build --platform linux/x86_64 -t clem/ex01 . to build
+
+
+Exercise 02
+
+Docker file to containerize Rails app.
+Dockerfile will be generic and called in another Dockerfile
+That would be achieve through the given dockerfile command in the exercise
+To make it easier to test out dl https://github.com/mhartl/sample_app_6th_ed
+
+build it with docker build -t ft-rails:on-build ft-rails
+docker build -t clem/ex02 ./   
+test with docker run --rm -p 3000:3000 clem/ex02
+should launch the app
+
+Exercise 03
+
+You have to make a Dockerfile that get us an instance of gitlab
+the subject provide the girlab repo
+use of debian as recommended on the repo
+
+docker build -t clem/ex03 . to build
+docker run -it --rm -p 8080:80 -p 8022:22 -p 8443:443 --memory="8g" --cpus"3" --privileged -e GITLAB_ROOT_PASSWORD="123123" clem/ginlab bash

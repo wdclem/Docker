@@ -1,1 +1,1 @@
-docker run --name roach-warden --platform=linux/amd64 -d --link spawning-pool:db -p 8081:80 phpmyadmin/phpmyadmin
+docker run --name roach-warden  --network clem --platform=linux/amd64 -e PMA_HOST=spawning-pool -p 8081:80 -d phpmyadmin
