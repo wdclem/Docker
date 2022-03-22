@@ -267,4 +267,5 @@ the subject provide the girlab repo
 use of debian as recommended on the repo
 
 docker build -t clem/ex03 . to build
-docker run -it --rm -p 8080:80 -p 8022:22 -p 8443:443 --memory="8g" --cpus"3" --privileged -e GITLAB_ROOT_PASSWORD="123123" clem/ginlab bash
+docker run -it --rm -p 8080:80 -p 8022:22 -p 8443:443 --memory="8g" --cpus="3" --privileged -e GITLAB_ROOT_PASSWORD="123123" clem/ex03 bash
+open browser on hhtps://localhost
