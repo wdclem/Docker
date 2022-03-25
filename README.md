@@ -163,7 +163,8 @@ https://docs.docker.com/engine/swarm/swarm-tutorial/create-swarm/
 19
 
 20
-
+Create an overlay network internal
+-d driver
 21
 
 To change the default usermane and password of guest/guest you use RABBITMQ_DEFAULT_USER and RABBITMQ_DEFAULT_PASS
@@ -182,7 +183,8 @@ With an orbital-command running on your host/swarm, set
 24 
 
 https://docs.docker.com/engine/reference/commandline/service_ps/
-docker service create -d --network overming --name engineering-bay --replicas 2 -e 0C_USERNAME=johnny -e 0C_PASSWD=123123 42school/engineering-bay
+docker service create -d --network overmind --name engineering-bay --replicas 2 -e 0C_USERNAME=johnny -e 0C_PASSWD=123123 42school/engineering-bay
+as 2 replicas on network overmind name engineering-bay
 
 25
 
@@ -244,8 +246,14 @@ Voice use port 9987 udp
 file transfer 30033 tcp
 Query server 10011
 
+Line 8 -x extract
+-v extracet with same name
+-f file specifier
+-j filter the archive trhoug bzip2
+
 once container is created need to make sure those are open
 docker build --platform linux/x86_64 -t clem/ex01 . to build
+docker run -it --rm -p=9987:9987/udp -p=10011:10011 -p=30033:30033 clem/ex01
 
 
 Exercise 02
@@ -254,6 +262,12 @@ Docker file to containerize Rails app.
 Dockerfile will be generic and called in another Dockerfile
 That would be achieve through the given dockerfile command in the exercise
 To make it easier to test out dl https://github.com/mhartl/sample_app_6th_ed
+
+nodejs is use to manage JavaScript used by a Rails application
+ONBUILD instruction adds to the image a trigger instruction to be executed at later time.
+without permission Basically only installing the gems you need in development on your development machine.
+https://stackoverflow.com/questions/19895395/what-does-bundle-install-without-production-do
+
 
 build it with docker build -t ft-rails:on-build ft-rails
 docker build -t clem/ex02 ./   
@@ -267,5 +281,27 @@ the subject provide the girlab repo
 use of debian as recommended on the repo
 
 docker build -t clem/ex03 . to build
-docker run -it --rm -p 8080:80 -p 8022:22 -p 8443:443 --memory="8g" --cpus="3" --privileged -e GITLAB_ROOT_PASSWORD="123123" clem/ex03 bash
-open browser on hhtps://localhost
+docker run -it --rm -p 80:80 -p 8022:22 -p 443:443 --privileged -e GITLAB_ROOT_EMAIL="wdclem@hotmail.fr" -e GITLAB_ROOT_PASSWORD="12345678" clem/ex03
+open browser on https://localhost
+try to connect git config --global http.sslVerify false
+git clone ssh://git@localhost:4242/wdclem/test.git
+git clone https://localhost/wdclem/test.git
+
+
+
+
+#BONUS
+
+Web server, using alpine to keep it small
+docker build -t Tea-Coco .
+docker run -d -p 80:80 <image-id> 
+-d for daemon -p to expose port
+expose port 80 on the inside and 80 on the outside and use the image ID
+
+TO check if it run docker ps
+check it on localhost
+to stop it docker stop <image-name>
+docker rm <container-name> to remove container, image will still exist
+
+docker exec -it <image-id> /bin/sh
+execute in interactive mode can navigate the container
