@@ -185,6 +185,7 @@ With an orbital-command running on your host/swarm, set
 https://docs.docker.com/engine/reference/commandline/service_ps/
 docker service create -d --network overmind --name engineering-bay --replicas 2 -e 0C_USERNAME=johnny -e 0C_PASSWD=123123 42school/engineering-bay
 as 2 replicas on network overmind name engineering-bay
+sudo usermod -aG docker
 
 25
 
